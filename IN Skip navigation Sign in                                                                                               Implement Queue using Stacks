@@ -1,0 +1,40 @@
+class MyQueue {
+
+    Stack<Integer> input = new Stack<>();
+    Stack<Integer> output = new Stack<>();
+
+    public void push(int x) {
+        input.push(x);
+    }
+
+    public int pop() {
+        peek();
+        return output.pop();
+    }
+
+    public int peek() {
+        if (output.empty()) {
+            while (!input.empty()) {
+                output.push(input.pop());
+            }
+        }
+        return output.peek();
+    }
+
+    public boolean empty() {
+        return input.empty() && output.empty();
+    }
+}
+
+
+// I’m implementing a Queue using two Stacks.
+
+// I use one stack called input to store the elements when I push them.
+
+// For pop() and peek(), I use the output stack. If the output stack is empty, I move all elements from input to output. This reverses their order, so the element that was inserted first comes to the top.
+
+// For example, if I push 1, 2, and 3, the input stack contains 1, 2, 3. When I transfer them to the output stack, the order becomes 3, 2, 1, so 1 is on top and can be removed first.
+
+// This gives me FIFO behavior, which is the basic property of a Queue.
+
+// The push() operation takes O(1), while pop() and peek() are amortized O(1), because each element is transferred from one stack to the other at most once.”
